@@ -1,0 +1,50 @@
+<template>
+  <div class="good" v-if="cate">
+     <img  :src="cate.primaryPicUrl"/>
+    <div class="text1">{{cate.simpleDesc}}</div>
+    <div class="text2">{{cate.name}}</div>
+    <div class="text3">￥{{cate.retailPrice}}</div>
+  </div>
+</template>
+
+<script>
+    export default {
+      props:{
+        cate:Object
+      }
+    }
+</script>
+
+<style scoped lang="less">
+   @import '../../common/less/rem';
+  .good{
+    padding:0 0 33/@rem 20/@rem;
+    margin-bottom: .3rem;
+     width:345/@rem;
+     height:503.984/@rem;
+     float: left;
+     img{
+       width:345/@rem;
+       height:345/@rem;
+       vert-align: top;
+     }
+     .text1{
+       padding:20/@rem 10/@rem;
+       background: #F1ECE2;
+       color:#9F8A60;
+       font-size: 24/@rem;
+       margin-bottom: .3rem;
+       padding-left: .3rem;
+     }
+    .text2{
+      color:#333;
+      font-size: 16@rem;
+      margin-bottom: .1rem;
+      padding-left: .2rem;
+    }
+    .text3{
+      color:#b4282d;
+      padding-left: .2rem;
+    }
+  }
+</style>
