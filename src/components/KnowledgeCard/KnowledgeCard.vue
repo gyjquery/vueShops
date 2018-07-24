@@ -1,26 +1,30 @@
 <template>
-  <div>
-    <div class="knowledgeCard">
+  <div v-if="recommend">
+    <div class="knowledgeCard" >
       <div class="texttop">为你推荐</div>
-      <div class="knowimage"><span>严选推荐</span></div>
+      <div  class="knowimage" v-if="recommend.recommendBanner" :style="{background:`url(${recommend.recommendBanner.picUrl})`}"><span v-if="recommend.recommendBanner">{{recommend.recommendBanner.nickname}}</span></div>
       <div class="introduce">
-        <p><span>选择一种风格，选择一种人生</span><span>9.6元起</span></p>
-        <p>ins风.北京风，ins风.北京风，ins风.北京风</p>
+        <p><span v-if="recommend.recommendBanner">{{recommend.recommendBanner.subtitle}}</span><span v-if="recommend.recommendBanner">{{recommend.recommendBanner.priceInfo}}元起</span></p>
+        <p v-if="recommend.recommendBanner">{{recommend.recommendBanner.title}}</p>
       </div>
     </div>
-    <div class="recommend" v-for="index in 2" :key="index">
+    <div class="recommend" v-for="(recommend,index) in recommend.recommends" :key="index">
       <div class="recleft">
-        <p><img src="//yanxuan.nosdn.127.net/2775332d3490abdb5bfe867c64d1c2e4.png?imageView&quality=75&thumbnail=48y48""/><span>丁磊</span></p>
-        <p>这款邮寄茶叶饮料</p>
-        <p>云翠龙井有机茶叶饮料限时69.8元</p>
+        <p><img src="recommend.avatar"/><span>{{recommend.nickname}}</span></p>
+        <p v-if="recommend">{{recommend.title}}</p>
+        <p>{{recommend.subtitle}}</p>
       </div>
-      <div class="recright"><span>丁磊好货推荐</span></div>
+      <div class="recright"  :style="{background:`url(${recommend.picUrl})`}"><span>{{recommend.typeName}}</span></div>
     </div>
   </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+      props:{
+        recommend:Object
+      },
+    }
 </script>
 
 <style scoped lang="less">
@@ -97,7 +101,10 @@
       width:279.984/@rem;
       height:272/@rem;
        background: url("//yanxuan.nosdn.127.net/f8c462f078d259736ce2f9584df487b6.jpg");
-      background-size:100% 100% ;
+      background-size:100% 100%!important; ;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
       span{
         display: inline-block;
         background: #fff;

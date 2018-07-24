@@ -39,9 +39,9 @@
       methods: {
         goto (path) {
            this.$router.replace(path);
+     //     当在首页时候   再点击回首页时  activeIndex的值要为0   才能让类初始化
            if(path==='/homepage'){
             PubSub.publish('activeIndex',0)
-
            }
         }
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="good" v-if="cate">
-     <img  :src="cate.primaryPicUrl"/>
+     <img  v-lazy="cate.primaryPicUrl"/>
     <div class="text1">{{cate.simpleDesc}}</div>
     <div class="text2">{{cate.name}}</div>
     <div class="text3">￥{{cate.retailPrice}}</div>
@@ -35,12 +35,18 @@
        font-size: 24/@rem;
        margin-bottom: .3rem;
        padding-left: .3rem;
+       overflow: hidden;
+       white-space: nowrap;
+       text-overflow: ellipsis;
      }
     .text2{
       color:#333;
       font-size: 16@rem;
       margin-bottom: .1rem;
       padding-left: .2rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     .text3{
       color:#b4282d;

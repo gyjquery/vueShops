@@ -7,6 +7,13 @@ export default {
   flashSaleIndexVO:[],//限时购
   topicLists: [], //专题精选
   cateLists: [],    //居家及以下所有
+  categorys: [] ,   //分类页数据
+  banners: [],    //识物banner
+  columns: [],   //banner下面的channel
+  recommend: {},   //为你推荐
+  tenfifteen:[], //十点一刻
+  findMores: [],    //更多精选
+  yzmNow:"" , //验证码
 }
 
 
@@ -20,13 +27,6 @@ export default {
 
 
 
-//
-//   banners: [],    //识物banner
-//   columns: [],   //banner下面的channel
-//   recommend: {},   //为你推荐
-// tenfifteens: [],    //十点一刻
 //   zhenpin: {},   //严选甄品
 // yxLook: {},    //严选LOOK
-// findMores: [],    //更多精选
-//
-//   categorys: []    //分类页数据
+

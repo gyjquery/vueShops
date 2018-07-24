@@ -20,6 +20,28 @@ export const reqflashSaleIndexVO= () => ajax("/flashSaleIndexVO")
 export const reqtopicLists= () => ajax("/topicList")
 //首页居家好物请求函数
 export const reqcateList= () => ajax("/cateList")
+//分类请求函数
+export const reqcategoryData= () => ajax("/categoryData")
+
+//识物请求函数
+export const reqbanners= () => ajax("/banner")
+
+
+//识物请求函数
+export const reqcolumn= () => ajax("/column")
+
+//识物 为你推荐 函数
+export const reqrecommend= () => ajax("/recommend")
+
+//十点一刻
+export const reqtenfifteen= () => ajax("/tenfifteen")
+
+//十点一刻
+export const reqfindMore= () => ajax("/findMore")
+
+export const reqyzm= () => ajax("/yzm")
+
+
 
 
 

@@ -28,13 +28,29 @@
           scrollX: true,
           click:true
         })
+
         PubSub.subscribe('activeIndex',(msg,activeIndex)=>{
           console.log(activeIndex)
            this.activeIndex = activeIndex
         })
         this.$store.dispatch('getHeaderNav')
+
       },
-    methods: {
+      beforeDestroy(){
+//       取消订阅  防止切换路由  导致重复订阅
+        PubSub.unsubscribe('activeIndex')
+      },
+      updated(){
+        const index =this.activeIndex;
+        localStorage.setItem("setActiveId",index)
+      },
+      beforeMount(){
+          const nowIndex = localStorage.getItem("setActiveId")
+          this.activeIndex=parseInt(nowIndex)
+
+      },
+
+      methods: {
       toNavCon (index) {
 //        console.log(index)
         if(index===0){

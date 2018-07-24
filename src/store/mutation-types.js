@@ -15,4 +15,19 @@ export const RECEIVE_REQFLASHSALEINDEXVO= 'receive_reqflashsaleindexvo' // 限�
 
 export const RECEIVE_REQTOPICLISTS= 'receive_reqtopiclists' // 专题精选
 
-export const RECEIVE_TOPICLISTS= 'receive_topiclists' // 专题精选
+export const RECEIVE_TOPICLISTS= 'receive_topiclists' // 居家好物
+
+export const RECEIVE_CATEGORYS= 'receive_categorys' // 分类
+
+export const RECEIVE_BANNERS= 'receive_banners' // 识物
+
+export const RECEIVE_COLUMN= 'receive_column' // 识物下面
+
+export const RECEIVE_RECOMMEND= 'receive_recommend' // 识物下面
+
+export const RECEIVE_TENFIFTEEN= 'receive_tenfifteen' // 十点一刻
+
+export const RECEIVE_GETFINDMORE= 'receive_getfindmore' // 更多精彩
+
+export const RECEIVE_YZM= 'receive_yzm' // 验证码
+

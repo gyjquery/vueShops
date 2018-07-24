@@ -10,39 +10,39 @@
       <div class="bannerswiper">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="index in 3">
-              <img src="//yanxuan.nosdn.127.net/4c5bacd7db1c4777e1a6651240899077.jpg?imageView&quality=75"/>
+            <div class="swiper-slide" v-for="(banner,index) in banners">
+              <img v-if="banner" :src="banner.picUrl"/>
             </div>
           </div>
         </div>
       </div>
       <div class="imgScrollX">
         <div class="slides">
-          <div class="slide" v-for="index in 9">
-            <div class="imgCon">
-              <p>320篇文章</p>
+          <div  class="slide" v-for="(item,index) in columns " v-if="item">
+            <div class="imgCon" :style="{background:`url(${item.picUrl})`}">
+              <p>{{item.articleCount}}</p>
             </div>
-            <div class="text1">严选推荐</div>
+            <div class="text1">{{item.title}}</div>
           </div>
         </div>
       </div>
       <Lines/>
-      <KnowledgeCard v-for="(item,index) in 2" :key="index"/>
+      <KnowledgeCard  :recommend="recommend"/>
       <Lines/>
       <div class="scrollDog">
         <header>十点一刻</header>
        <div class="single">
          <div class="singledogs">
-           <div class="singledog" v-for="(item,index) in 3">
-             <div>--今日话题--</div>
-             <div>关于单身</div>
-             <div>聊聊单身的好处</div>
+           <div class="singledog" v-for="(ten,index) in tenfifteen">
+             <div>--{{ten.title}}--</div>
+             <div>{{ten.desc}}</div>
+             <!--<div>聊聊单身的好处</div>-->
              <div class="images">
-               <img src="//yanxuan.nosdn.127.net/bb760f20a48b19d3d4979962c865cb56?imageView&thumbnail=48y48" alt="">
+               <img :src="ten.participantAvatar[0]" alt="">
                <img src="http://nos.netease.com/yanxuan/8945ae63d940cc42406c3f67019c5cb6.png?imageView&thumbnail=48y48" alt="">
                <img src="http://nos.netease.com/yanxuan/8945ae63d940cc42406c3f67019c5cb6.png?imageView&thumbnail=48y48" alt="">
                <span class="ellipsis"></span>
-               <span>525人参与会话</span>
+               <span>{{ten.participantNum}}人参与会话</span>
              </div>
            </div>
            <div class="singledog newsingledog">
@@ -67,7 +67,7 @@
       <div class="more">
         更多精彩
       </div>
-      <KnowleWonderful v-for="(item,index) in 9" :key="index+'1'"/>
+      <KnowleWonderful v-for="(findMore,index) in findMores" :key="index+'1'" :findMore="findMore"/>
     </div>
     </div>
   </div>
@@ -80,12 +80,11 @@
   import KnowledgeCard from '../../components/KnowledgeCard/KnowledgeCard.vue'
   import Lines from '../../components/Lines/Lines.vue'
   import KnowleWonderful from '../../components/KnowleWonderful/KnowleWonderful.vue'
+  import {mapState} from 'vuex'
   export default {
+
       mounted () {
-       new Swiper ('.swiper-container', {
-          loop: true,
-         slidesPerView: 'auto',
-       })
+
 
         new BScroll('.imgScrollX',{
           bounce: true,
@@ -113,12 +112,30 @@
 
 
         })
+        this.$store.dispatch('getbanners')
+        this.$store.dispatch('getcolumn')
+        this.$store.dispatch('getrecommend')
+        this.$store.dispatch('gettenfifteen')
+        this.$store.dispatch('getfindMore')
       },
+    computed:{
+      ...mapState(['banners','columns','recommend','tenfifteen','findMores'])
+    },
      components:{
        KnowledgeCard,
        Lines,
        KnowleWonderful
-     }
+     },
+    watch:{
+      banners (){
+        this.$nextTick(()=>{
+          new Swiper ('.swiper-container', {
+            loop: true,
+            slidesPerView: 'auto',
+          })
+        })
+      }
+    }
     }
 </script>
 
@@ -186,18 +203,21 @@
          width: 690/@rem;
          height:225.984/@rem;
          margin:32/@rem 30/@rem 48/@rem 30/@rem;
+
          .slides{
-           width:3000/@rem;
+           width:2000/@rem;
+           white-space: nowrap;
             .slide{
               display: inline-block;
               margin-right: 24/@rem;
               width:164/@rem;
               height:210/@rem;
+              white-space: nowrap;
               .imgCon{
                 width:161/@rem;
                 height:161/@rem;
                 background: url("//yanxuan.nosdn.127.net/254e04f823354c67d765d68c4012b64e.png?imageView&quality=75");
-                background-size: 100% 100%;
+                background-size: 100% 100%!important;
                 margin-bottom: 22/@rem;
                 border-radius: .1rem;
                 p{
@@ -211,7 +231,9 @@
                 font-size: 24/@rem;
                 color:#333;
                 text-align: center;
-
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
               }
             }
          }

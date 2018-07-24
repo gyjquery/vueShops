@@ -6,8 +6,14 @@ import {
  RECEIVE_EWITEMLISTS2,
   RECEIVE_REQFLASHSALEINDEXVO,
   RECEIVE_REQTOPICLISTS,
-  RECEIVE_TOPICLISTS
-
+  RECEIVE_TOPICLISTS,
+  RECEIVE_CATEGORYS,
+  RECEIVE_BANNERS,
+  RECEIVE_COLUMN,
+  RECEIVE_RECOMMEND,
+  RECEIVE_TENFIFTEEN,
+  RECEIVE_GETFINDMORE,
+  RECEIVE_YZM
 } from './mutation-types'
 import {
   reqHeadCateList,
@@ -17,7 +23,14 @@ import {
   reqnewitemlists2,
   reqflashSaleIndexVO,
   reqtopicLists,
-  reqcateList
+  reqcateList,
+  reqcategoryData,
+  reqbanners,
+  reqcolumn,
+  reqrecommend,
+  reqtenfifteen,
+  reqfindMore,
+  reqyzm
 } from '../api'
 
 export default {
@@ -84,5 +97,62 @@ export default {
       const cateList = result.data
       commit(RECEIVE_TOPICLISTS, {cateList})
     }
+  },
+//异步分类action
+  async getcategorys ({commit}) {
+    let result = await reqcategoryData()
+    if(result.code === 0){
+
+      const categorys = result.data
+      commit(RECEIVE_CATEGORYS, {categorys})
+    }
+  },
+//识物action
+  async getbanners ({commit}) {
+  let result = await reqbanners()
+  if(result.code === 0){
+    const banners = result.data
+    commit(RECEIVE_BANNERS, {banners})
   }
+},
+//识物下边action
+  async getcolumn ({commit}) {
+    let result = await reqcolumn()
+    if(result.code === 0){
+      const column = result.data
+      commit(RECEIVE_COLUMN, {column})
+    }
+  },
+  //识物为你推荐action
+  async getrecommend ({commit}) {
+    let result = await reqrecommend()
+    if(result.code === 0){
+      const recommend = result.data
+      commit(RECEIVE_RECOMMEND, {recommend})
+    }
+  },
+  //十点一刻
+  async  gettenfifteen ({commit}) {
+    let result = await reqtenfifteen()
+    if(result.code === 0){
+      const tenfifteen = result.data
+      commit(RECEIVE_TENFIFTEEN, {tenfifteen})
+    }
+  },
+  //更多精彩
+  async  getfindMore ({commit}) {
+    let result = await reqfindMore()
+    if(result.code === 0){
+      const findMore = result.data
+      commit(RECEIVE_GETFINDMORE, {findMore})
+    }
+  },
+//yzm
+async  getyzm ({commit}) {
+  let result = await reqyzm()
+  if(result.code === 0){
+    const yzm = result.data
+    commit(RECEIVE_YZM, {yzm})
+  }
+},
 }

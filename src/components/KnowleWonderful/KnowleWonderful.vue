@@ -1,13 +1,15 @@
 <template>
    <div class="knowlewonderful">
-       <div><img src="//yanxuan.nosdn.127.net/9b23a51f7833e95f3ce905975e639c5e.jpg?imageView&quality=75"/></div>
-       <div>简美家具首款首发</div>
+       <div><img :src="findMore.itemPicUrl"/></div>
+       <div>{{findMore.subTitle}}</div>
    </div>
 </template>
 
 <script>
     export default {
-
+     props:{
+       findMore:Object
+     }
     }
 </script>
 

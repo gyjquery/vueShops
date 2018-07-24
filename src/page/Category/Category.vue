@@ -12,6 +12,9 @@
   import CategoryList from '../../components/CategoryList/CategoryList.vue'
   import CategoryContent from '../../components/CategoryContent/CategoryContent.vue'
     export default {
+    mounted(){
+      this.$store.dispatch('getcategorys')
+    },
     components:{
       CategoryList,
       CategoryContent

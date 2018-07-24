@@ -4,7 +4,7 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(focus, index) in focusList" :key="index">
-            <img :src="focus.picUrl"/>
+            <img v-lazy="focus.picUrl"/>
           </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -52,7 +52,7 @@
         <div class="swiper1">
           <div class="swiper-wrapper">
             <div class="swiper-slide swip" v-for="(item,index) in acc" @click="tospecial">
-              <img class="swiperImg" :src="item.itemPicUrl"/>
+              <img class="swiperImg" v-lazy="item.itemPicUrl"/>
               <div class="textC">{{item.title}}<span>{{item.priceInfo}}元起</span></div>
               <div class="textCC">{{item.subtitle}}</div>
             </div>
@@ -118,7 +118,6 @@
 
         },
         topicLists(val){
-          console.log(1)
             this.$nextTick(()=>{
                new Swiper ('.swiper1', {
                 slidesPerView :'auto'
@@ -139,7 +138,12 @@
           },
           mouseWheel: true,
         })
-
+//        当切换其他路由后回来vuex数据不变 监控不上  swiper
+       if(this.topicLists){
+         new Swiper ('.swiper1', {
+           slidesPerView :'auto'
+         })
+       }
 
       },
       methods:{
@@ -167,7 +171,7 @@
       width:100%;
       height:399.984/@rem;
       .swiper-wrapper{
-          background: #ff0;
+
         }
       img{
         width: 100%;

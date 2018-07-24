@@ -1,18 +1,25 @@
 <template>
   <div class="categorycontent">
-       <div class="navImg"><img src="http://yanxuan.nosdn.127.net/4068e8f7e4907c4dbced3b14c3af5091.jpg"/></div>
+       <div class="navImg"><img :src="category.bannerUrl"/></div>
        <div class="text"><span></span>推荐专区分类<span></span></div>
        <ul>
-         <li v-for="(item,index) in 10">
-           <img src="http://yanxuan.nosdn.127.net/9b641e20dd9482da1428e37fb9a1a4ed.png?imageView&quality=85&thumbnail=144x144"/>
-           <div class="categoryText">服装夏季专享</div>
+         <li v-for="(item,index) in category.subCateList">
+           <img :src="item.bannerUrl ||item.wapBannerUrl "/>
+           <div class="categoryText">{{item.name}}</div>
          </li>
        </ul>
   </div>
 </template>
 <script>
   import BScroll from 'better-scroll'
+  import PubSub from 'pubsub-js'
+  import {mapState} from 'vuex'
     export default {
+    data () {
+      return{
+        category:[]
+      }
+    },
     mounted () {
 //      自定义滚动条
       new BScroll('.categorycontent' ,{
@@ -24,7 +31,28 @@
           interactive: false,
         },
       })
-    }
+   //  接收左侧导航的数据
+      PubSub.subscribe('sendCategory',(msg,category)=>{
+        console.log(category)
+        this.category=category
+      })
+    },
+      beforeDestroy(){
+//       取消订阅  防止切换路由  导致重复订阅
+        PubSub.unsubscribe('sendCategory')
+      },
+      methods:{
+
+      },
+      computed:{
+        ...mapState(['categorys'])
+
+      },
+      watch:{
+        categorys(){
+           this.category =this.categorys[0]
+        }
+      }
     }
 </script>
 
@@ -73,6 +101,10 @@
          .categoryText{
            color: #333;
            font-size: 24/@rem;
+           overflow: hidden;
+           text-overflow:ellipsis;
+           white-space: nowrap;
+           text-align: center;
          }
        }
        li:nth-child(3n){
