@@ -142,6 +142,7 @@ export default {
   //更多精彩
   async  getfindMore ({commit}) {
     let result = await reqfindMore()
+
     if(result.code === 0){
       const findMore = result.data
       commit(RECEIVE_GETFINDMORE, {findMore})

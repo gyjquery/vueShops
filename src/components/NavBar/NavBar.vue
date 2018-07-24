@@ -49,7 +49,9 @@
           this.activeIndex=parseInt(nowIndex)
 
       },
-
+      beforeDestroy(){
+        localStorage.setItem("setActiveId",0)
+      },
       methods: {
       toNavCon (index) {
 //        console.log(index)

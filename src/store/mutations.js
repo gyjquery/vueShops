@@ -69,8 +69,8 @@ export default {
    state.tenfifteen = tenfifteen
  },
 
-  [RECEIVE_GETFINDMORE](state,{findmore}){
-    state.findmore = findmore
+  [RECEIVE_GETFINDMORE](state,{findMore}){
+    state.findMores = findMore
   },
   [RECEIVE_YZM](state,{yzm}){
   state.yzmNow = yzm
